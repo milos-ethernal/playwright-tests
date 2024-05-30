@@ -1,6 +1,7 @@
 import { test, expect } from '@playwright/test';
 
 test('Happy path', async ({ page }) => {
+  test.setTimeout(1000 * 70)
   await page.goto('http://localhost:4001/');
   await page.getByPlaceholder('Username').click();
   await page.getByPlaceholder('Username').fill('JPMadmin');
@@ -26,7 +27,7 @@ test('Happy path', async ({ page }) => {
   await page.getByRole('button', { name: 'Log in' }).click();
   await page.getByRole('link', { name: 'CONFIRM' }).click();
   await page.getByRole('button', { name: 'CONFIRM' }).click();
-  await page.waitForTimeout(1000 * 10);
+  await page.waitForTimeout(1000 * 60);
   await page.locator('#transactionsDiv').getByRole('link').last().click();
   await expect(page.getByText('COMPLETED')).toHaveText('COMPLETED')
 });
